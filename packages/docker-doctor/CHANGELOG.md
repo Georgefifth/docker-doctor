@@ -1,5 +1,12 @@
 # @docker-doctor/cli
 
+## 0.4.3
+
+### Patch Changes
+
+- 485a1ee: Sanitize scanned file paths before they reach a coding agent. Rule messages were already flattened, but the paths beside them were interpolated raw into both the handoff prompt and the `.docker-doctor/*.txt` reports, so a filename containing newlines could introduce its own line into an agent's instructions. Those per-rule reports now also flatten the message, matching the prompt.
+- 37b3f7d: Warn when a config names a rule or category that does not exist. Keys are matched exactly, so a typo'd rule key — or a category written as `security` instead of `Security` — used to be accepted and then silently match nothing, leaving a suppression the user believed was active doing nothing. Unknown keys are reported on stderr rather than failing the scan, so a config naming a rule removed in a later release still runs.
+
 ## 0.4.2
 
 ### Patch Changes
